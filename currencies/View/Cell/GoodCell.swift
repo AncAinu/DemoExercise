@@ -10,7 +10,7 @@ import UIKit
 import SwiftKeepLayout
 
 class GoodCell: UITableViewCell {
-	static let height = 50
+	static let height: CGFloat = 50
 	
 	let quantityLabel = UILabel()
 	let titleLabel = UILabel()

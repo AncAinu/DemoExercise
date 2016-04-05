@@ -18,6 +18,8 @@ class Session {
 	var currencies = [Currency]()
 	private(set) var selectedCurrency: Currency
 	
+	private(set) var basket: [(good: Good, quantity: Int)]
+	
 	private init() { // private ensure singleton pattern
 		availableGoods = [
 			Good(name: "Peas", unit: "Bag", pricePerUnit: 0.95),
@@ -26,10 +28,13 @@ class Session {
 			Good(name: "Beans", unit: "Can", pricePerUnit: 0.73)
 		]
 		
+		basket = availableGoods.map{($0, 0)} // Fonctionnal programming is good :D
+		
 		currencies = [Currency(name: "USDUSD", quote: 1)]
 		selectedCurrency = currencies.first!
 	}
 	
+	// MARK: CURRENCIES
 	func requestCurrencies() {
 		Alamofire.request(.GET, CURRENCY_LAYER_API_BASE_URL, parameters: [
 			CURRENCY_LAYER_PARAMETER_ACCESS_KEY: CURRENCY_LAYER_ACCESS_KEY,
@@ -65,5 +70,21 @@ class Session {
 		else {
 			selectedCurrency = currencies.first!
 		}
+	}
+	
+	// MARK: BASKET
+	func quantityInBasket(good: Good) -> Int {
+		if let i = basket.indexOf({$0.good === good}) {
+			return basket[i].quantity
+		}
+		assert(false, "the basket should always find the good as they are initialized together and are supposed to be immutable (outside Session)")
+	}
+	
+	func setQuantityInBasket(quantity: Int, forGood good: Good) {
+		if let i = basket.indexOf({$0.good === good}) {
+			basket[i].quantity = quantity
+			return
+		}
+		assert(false, "the basket should always find the good as they are initialized together and are supposed to be immutable (outside Session)")
 	}
 }
