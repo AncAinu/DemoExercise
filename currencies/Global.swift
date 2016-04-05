@@ -6,7 +6,7 @@
 //  Copyright © 2016 Solera. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 let CURRENCY_LAYER_API_BASE_URL = "http://apilayer.net/api/live"
 
@@ -19,3 +19,5 @@ let CURRENCY_LAYER_CURRENCIES = "USD,EUR, GBP"
 let CURRENCY_LAYER_FORMAT = "1"
 
 // let CURRENCY_LAYER_API_LIVE_URL = "\(CURRENCY_LAYER_API_BASE_URL)?access_key=\(CURRENCY_LAYER_ACCESS_KEY)&currencies=\(CURRENCY_LAYER_CURRENCIES)&format=1"
+
+let SWIPE_DISTANCE: CGFloat = 0.08 // in %

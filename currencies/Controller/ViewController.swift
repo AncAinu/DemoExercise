@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MCSwipeTableViewCell
 
-class ViewController: SharedTableViewController {
+class ViewController: SharedTableViewController, MCSwipeTableViewCellDelegate {
 	
 	let totalPriceLabel = UILabel()
 	
@@ -89,41 +90,50 @@ class ViewController: SharedTableViewController {
 		cell.priceLabel.text = "\(good.unitPriceAtSelectedCurrency)\(Session.instance.selectedCurrency.displayedName)"
 		cell.unitLabel.text = "/\(good.unit)"
 		
+		cell.defaultColor = UIColor.grayColor()
+		
+		cell.delegate = self
+		cell.firstTrigger = SWIPE_DISTANCE
+		cell.setSwipeGestureWithView(UIView(), color: UIColor.greenColor(), mode: .Switch, state: .State1) { (swipecell: MCSwipeTableViewCell!, state: MCSwipeTableViewCellState, mode: MCSwipeTableViewCellMode) in
+			if let indexPath = tableView.indexPathForCell(swipecell) {
+				self.addGood(indexPath)
+			}
+		}
+		
+		cell.setSwipeGestureWithView(UIView(), color: UIColor.redColor(), mode: .Switch, state: .State3) { (swipecell: MCSwipeTableViewCell!, state: MCSwipeTableViewCellState, mode: MCSwipeTableViewCellMode) in
+			if let indexPath = tableView.indexPathForCell(swipecell) {
+				self.removeGood(indexPath)
+			}
+		}
+		
 		return cell
 	}
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		let good = Session.instance.availableGoods[indexPath.row]
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 		
-		Session.instance.setQuantityInBasket(Session.instance.quantityInBasket(good) + 1, forGood: good)
+		addGood(indexPath)
+	}
+	
+	// MARK: BASKET OPTION
+	func addGood(indexPath: NSIndexPath) {
+		changeGoodQuantity(1, indexPath: indexPath)
+	}
+	
+	func removeGood(indexPath: NSIndexPath) {
+		changeGoodQuantity(-1, indexPath: indexPath)
+	}
+	
+	func changeGoodQuantity(quantity: Int,indexPath: NSIndexPath) {
+		let good = Session.instance.availableGoods[indexPath.row]
+		
+		Session.instance.setQuantityInBasket(max(Session.instance.quantityInBasket(good) + quantity, 0), forGood: good)
 		
 		if let cell = tableView.cellForRowAtIndexPath(indexPath) as? GoodCell {
 			cell.quantityLabel.text = "\(Session.instance.quantityInBasket(good))"
 		}
 		
 		layoutTotal()
-	}
-	
-	// MARK: TABLE EDIT
-	func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
-		let good = Session.instance.availableGoods[indexPath.row]
-		print("Remove (\(Session.instance.quantityInBasket(good)))")
-		return "Remove (\(Session.instance.quantityInBasket(good)))"
-	}
-	
-	func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-		if (editingStyle == .Delete) {
-			let good = Session.instance.availableGoods[indexPath.row]
-			
-			Session.instance.setQuantityInBasket(max(Session.instance.quantityInBasket(good) - 1, 0), forGood: good)
-			
-			if let cell = tableView.cellForRowAtIndexPath(indexPath) as? GoodCell {
-				cell.quantityLabel.text = "\(Session.instance.quantityInBasket(good))"
-			}
-			
-			layoutTotal()
-		}
 	}
 	
 	// MARK: ACTION
@@ -138,6 +148,28 @@ class ViewController: SharedTableViewController {
 	func currenciesDidUpdate() {
 		tableView.reloadData()
 		layoutTotal()
+	}
+	
+	// MARK: SWIPE
+	func swipeTableViewCell(cell: MCSwipeTableViewCell!, didSwipeWithPercentage percentage: CGFloat) {
+		if percentage > (SWIPE_DISTANCE + 0.02) || percentage < (-SWIPE_DISTANCE - 0.02) {
+			
+			if percentage < 0 {
+				if cell.completionBlock3 != nil {
+					cell.completionBlock3!(cell, .State1, .Switch)
+				}
+			}
+			else {
+				if cell.completionBlock1 != nil {
+					cell.completionBlock1!(cell, .State1, .Switch)
+				}
+			}
+			
+			cell.swipeToOriginWithCompletion {
+				cell.shouldDrag = true
+			}
+			cell.shouldDrag = false
+		}
 	}
 }
 

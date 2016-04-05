@@ -8,8 +8,9 @@
 
 import UIKit
 import SwiftKeepLayout
+import MCSwipeTableViewCell
 
-class GoodCell: UITableViewCell {
+class GoodCell: MCSwipeTableViewCell {
 	static let height: CGFloat = 50
 	
 	let quantityLabel = UILabel()
