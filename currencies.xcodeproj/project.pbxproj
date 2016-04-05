@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8BF7A031BA944A950B404922 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51412203209DCE13D25DD69B /* Pods.framework */; };
 		A9B28E4D1CB3D33C00464083 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B28E4C1CB3D33C00464083 /* AppDelegate.swift */; };
-		A9B28E521CB3D33C00464083 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9B28E501CB3D33C00464083 /* Main.storyboard */; };
 		A9B28E551CB3D33C00464083 /* currencies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A9B28E531CB3D33C00464083 /* currencies.xcdatamodeld */; };
 		A9B28E571CB3D33C00464083 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9B28E561CB3D33C00464083 /* Assets.xcassets */; };
 		A9B28E5A1CB3D33C00464083 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9B28E581CB3D33C00464083 /* LaunchScreen.storyboard */; };
@@ -19,6 +18,7 @@
 		A9B28E7A1CB3D58C00464083 /* SharedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B28E791CB3D58C00464083 /* SharedViewController.swift */; };
 		A9B28E7C1CB3D60800464083 /* SharedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B28E7B1CB3D60800464083 /* SharedTableViewController.swift */; };
 		A9B28E7F1CB3D7BC00464083 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B28E7E1CB3D7BC00464083 /* Global.swift */; };
+		A9B28E811CB3DBAC00464083 /* Good.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B28E801CB3DBAC00464083 /* Good.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +37,6 @@
 		51412203209DCE13D25DD69B /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B28E491CB3D33C00464083 /* currencies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = currencies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B28E4C1CB3D33C00464083 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A9B28E511CB3D33C00464083 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A9B28E541CB3D33C00464083 /* currencies.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = currencies.xcdatamodel; sourceTree = "<group>"; };
 		A9B28E561CB3D33C00464083 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9B28E591CB3D33C00464083 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +50,7 @@
 		A9B28E7B1CB3D60800464083 /* SharedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedTableViewController.swift; sourceTree = "<group>"; };
 		A9B28E7D1CB3D6F100464083 /* Tech Test - iOS Developer.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Tech Test - iOS Developer.pdf"; sourceTree = "<group>"; };
 		A9B28E7E1CB3D7BC00464083 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		A9B28E801CB3DBAC00464083 /* Good.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Good.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +118,6 @@
 				A9B28E721CB3D4FF00464083 /* Model */,
 				A9B28E731CB3D4FF00464083 /* View */,
 				A9B28E701CB3D4FF00464083 /* Controller */,
-				A9B28E501CB3D33C00464083 /* Main.storyboard */,
 				A9B28E561CB3D33C00464083 /* Assets.xcassets */,
 				A9B28E581CB3D33C00464083 /* LaunchScreen.storyboard */,
 				A9B28E5B1CB3D33C00464083 /* Info.plist */,
@@ -149,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				A9B28E751CB3D54100464083 /* Session.swift */,
+				A9B28E801CB3DBAC00464083 /* Good.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -263,7 +263,6 @@
 			files = (
 				A9B28E5A1CB3D33C00464083 /* LaunchScreen.storyboard in Resources */,
 				A9B28E571CB3D33C00464083 /* Assets.xcassets in Resources */,
-				A9B28E521CB3D33C00464083 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +334,7 @@
 				A9B28E741CB3D4FF00464083 /* ViewController.swift in Sources */,
 				A9B28E7C1CB3D60800464083 /* SharedTableViewController.swift in Sources */,
 				A9B28E551CB3D33C00464083 /* currencies.xcdatamodeld in Sources */,
+				A9B28E811CB3DBAC00464083 /* Good.swift in Sources */,
 				A9B28E7F1CB3D7BC00464083 /* Global.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,14 +358,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A9B28E501CB3D33C00464083 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A9B28E511CB3D33C00464083 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A9B28E581CB3D33C00464083 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -466,6 +458,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = currencies/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = solera.exercise.currencies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -478,6 +471,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = currencies/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = solera.exercise.currencies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
