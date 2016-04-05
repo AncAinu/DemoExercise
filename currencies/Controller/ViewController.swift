@@ -39,11 +39,14 @@ class ViewController: SharedTableViewController {
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let good = Session.instance.availableGoods[indexPath.row]
-		let reuseIdentifier = "cell"
-		let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) ?? UITableViewCell(style: .Value1, reuseIdentifier: reuseIdentifier)
+		let reuseIdentifier = "GoodCell"
+		let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) as? GoodCell ?? GoodCell(reuseIdentifier: reuseIdentifier)
 		
-		cell.textLabel?.text = good.name
-		cell.detailTextLabel?.text = "\(good.unitPriceAtSelectedCurrency)/\(good.unit)"
+		cell.titleLabel.text = good.name
+		cell.quantityLabel.text = "0"
+		cell.priceLabel.text = "\(good.unitPriceAtSelectedCurrency)\(Session.instance.selectedCurrency.displayedName)"
+		cell.unitLabel.text = "/\(good.unit)"
+		
 		return cell
 	}
 	
