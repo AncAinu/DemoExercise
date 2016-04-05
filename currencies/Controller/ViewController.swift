@@ -15,6 +15,8 @@ class ViewController: SharedTableViewController {
 		super.init(style: .Plain)
 		
 		title = "Goods"
+		
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.currenciesDidUpdate), name: NOTIFICATION_CURRENCIES_DID_UPDATE, object: Session.instance)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -24,7 +26,10 @@ class ViewController: SharedTableViewController {
 	// MARK: LAYOUT
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+		
+		navigationItem.rightBarButtonItem = UIBarButtonItem(title: Session.instance.selectedCurrency.displayedName, style: .Plain, target: self, action: #selector(ViewController.currencyButtonAction))
+		
+		Session.instance.requestCurrencies()
 	}
 	
 	// MARK: TABLE
@@ -38,8 +43,20 @@ class ViewController: SharedTableViewController {
 		let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) ?? UITableViewCell(style: .Value1, reuseIdentifier: reuseIdentifier)
 		
 		cell.textLabel?.text = good.name
-		cell.detailTextLabel?.text = "\(good.unitPrice)/\(good.unit)"
+		cell.detailTextLabel?.text = "\(good.unitPriceAtSelectedCurrency)/\(good.unit)"
 		return cell
+	}
+	
+	// MARK: ACTION
+	func currencyButtonAction() {
+		Session.instance.selectNextCurrency()
+		navigationItem.rightBarButtonItem?.title = Session.instance.selectedCurrency.displayedName
+		tableView.reloadData()
+	}
+	
+	// MARK: OBSERVERS
+	func currenciesDidUpdate() {
+		tableView.reloadData()
 	}
 }
 
